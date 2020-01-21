@@ -14,8 +14,8 @@ export class DoneTaskComponent implements OnInit {
 
 
   constructor(private tasksService: TaskService) {
-    this.tasksService.getTaskDoneObs().subscribe((tasks: Array<Task>) => {
-      this.taskDone = tasks;
+    this.tasksService.getTaskListObs().subscribe((tasks: Array<Task>) => {
+      this.taskDone = tasks.filter(task => task.isDone === true);
     });
   }
 

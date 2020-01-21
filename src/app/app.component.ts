@@ -1,3 +1,4 @@
+import { TaskService } from './services/tasks.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
