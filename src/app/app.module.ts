@@ -1,7 +1,7 @@
 import { HttpService } from './services/http.service';
 import { TaskService } from './services/tasks.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AddTaskComponent } from './add-task/add-task.component';
@@ -31,6 +31,7 @@ import { AppRoutingModule } from './app.routing.module';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [TaskService, HttpService],
   bootstrap: [AppComponent]
