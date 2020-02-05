@@ -2,27 +2,30 @@ import { HttpService } from './http.service';
 import { Task } from './../model/task';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable()
 
 export class TaskService {
-  saveTasksInDb() {
-    throw new Error("Method not implemented.");
-  }
 
   private taskListObs = new BehaviorSubject<Array<Task>>([]);
 
 
-  constructor(private httpService: HttpService) {
-    const taskList = [
-      { name: 'Zakupy', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Nauka Angulara', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Podlewanie kwiatów', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Sprzatanie', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Odkurzanie', created: new Date().toLocaleString(), end: new Date().toLocaleString(), isDone: true }
-    ];
-    this.taskListObs.next(taskList);
+  constructor(private httpService: HttpService, public angularFire: AngularFireAuth) {
+    angularFire.authState.subscribe(user => {
+      if (user) {
+        this.init();
+      } else {
+        this.taskListObs.next([]);
+      }
+    });
+  }
+
+  init() {
+    this.httpService.getTasks().subscribe(list => {
+      this.taskListObs.next(list);
+    });
   }
 
   add(task: Array<Task>) {
