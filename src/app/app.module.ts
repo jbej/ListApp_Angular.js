@@ -18,18 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from './../environments/environment';
 
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyBX9es617iaemyyGu1QkJC8UWwyIBniTr8',
-  authDomain: 'listproject-81b29.firebaseapp.com',
-  databaseURL: 'https://listproject-81b29.firebaseio.com',
-  projectId: 'listproject-81b29',
-  storageBucket: 'listproject-81b29.appspot.com',
-  messagingSenderId: '873684391382',
-  appId: '1:873684391382:web:dd4e58a5e691de37078077',
-  measurementId: 'G-P8XERGDBS5'
-};
+const config = environment.firebaseConfig;
 
 @NgModule({
   declarations: [
@@ -49,7 +40,7 @@ const firebaseConfig = {
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(config),
     AngularFireAuthModule
   ],
   providers: [TaskService, HttpService, AuthGuardService, AuthService],
